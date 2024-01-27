@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+
+
+
+
+{% block content %}
+<div class="header">
+    <h1>{{ request.user }}のタスク</h1>
+</div>
+
+<div class="searchWrapper">
+<form action="" method="GET">
+    <input type="text" name="search" value="{{ search }}" class="searchInput">
+    <input type="submit" value="検索" class="searchButton">
+</form>
+<a href="{% url 'create' %}" class="addButton">+</a>
+</div>
+<!-- <table>
+    <tr>
+        <th>タスク</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.title }}</td>
+        <td><a href="{% url 'detail' task.pk %}">確認</a></td>
+        <td><a href="{% url 'update' task.pk %}">編集</a></td>
+        <td><a href="{% url 'delete' task.pk %}">削除</a></td>
+    </tr>
+    {% endfor %}
+
+</table> -->
+
+<div class="tasksWrapper">
+    {% for task in tasks %}
+    <div class="taskWrapper">
+        {% if task.completed %}
+        <div class="taskTitle">
+            <div class="taskCompletedIcon"></div>
+            <s><a href="{% url 'detail' task.pk %}">{{ task }}</a></s>
+        </div>
+        <div>
+            <a href="{% url 'update' task.pk %}" class="editButton">&#x270e;</a>
+
+            <a href="{% url 'delete' task.pk %}" class="deleteButton">x</a>
+        </div>
+        {% else %}
+        <div class="taskTitle">
+            <div class="taskInCompletedIcon"></div>
+            <a href="{% url 'detail' task.pk %}">{{ task }}</a>
+        </div>
+        <div>
+            <a href="{% url 'update' task.pk %}" class="editButton">&#x270e;</a>
+
+            <a href="{% url 'delete' task.pk %}" class="deleteButton">x</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% empty %}
+    <h3 style="padding-left: 20px;">タスクがありません</h3>
+
+    {% endfor %}
+</div>
+
+<div class="loginAndLogout">
+    {% if request.user.is_authenticated %}
+    <!-- <p>{{ request.user }}</p> -->
+    <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+    <a href="{% url 'login' %}">ログイン</a>
+    {% endif %}
+</div>
+{% endblock content %}

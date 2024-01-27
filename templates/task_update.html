@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+
+{% block header %}
+<h2>タスクの編集</h2>
+{% endblock header %}
+
+{% block content %}
+<form action="" method="post" style="padding: 20px;">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="変更"  class="searchButton">
+</form> 
+{% endblock content %}

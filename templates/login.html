@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+
+{% block content %}
+<div class="header">
+    <h1>ログイン</h1>
+</div>
+<form action="" method="post" style="padding: 20px;">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ログイン" class="searchButton">
+</form>
+
+<hr />
+
+<div class="accountWrapper">
+<p>アカウントを持っていませんか</p>
+<a href="{% url 'register' %}" class="btn btn-primary" role="button" >新規登録</a>
+</div>
+
+{% endblock content %}

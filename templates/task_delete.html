@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock customcss %}
+
+
+
+{% block content %}
+<div class="header">
+    <a href="{% url 'list' %}" style="color: rgb(255, 255, 255)">戻る</a>
+</div>
+
+<form action="" method="post" style="padding: 20px;">{% csrf_token %}
+    <p>{{ object }}をタスクを削除しますか？</p>
+    <input type="submit" value="削除" class="searchButton">
+</form>
+{% endblock content %}
